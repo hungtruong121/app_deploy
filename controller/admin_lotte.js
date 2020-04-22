@@ -24,7 +24,7 @@ exports.updateFoods = async (req, res, next) => {
         const newFood = await lotteData();
         if(newFood){
             await ProductsSchema.deleteMany();
-            await ProductsSchema.insertMany(lotteData);
+            await ProductsSchema.insertMany(newFood);
             res.status(201).json({success: true, message: 'Updated successfully'});
         } else {
             res.status(500).json({success: false});
