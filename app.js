@@ -14,6 +14,8 @@ const foodRoute = require('./router/food');
 const lotteRoute = require('./router/admin_lotte');
 const catogoryRoute = require('./router/admin_catogory');
 const nutritionRoute = require('./router/admin_nutritions');
+const dishRoute = require('./router/dish');
+const menuRoute = require('./router/admin_menu');
 
 const app = express();
 // Body parser
@@ -28,6 +30,8 @@ app.use('/api/foods/', foodRoute);
 app.use('/api/admin/lotte', lotteRoute);
 app.use('/api/admin/catogory', catogoryRoute);
 app.use('/api/admin/nutrition', nutritionRoute);
+app.use('/api/dishes', dishRoute);
+app.use('/api/admin/menu', menuRoute);
 
 
 

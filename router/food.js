@@ -3,10 +3,11 @@ const router = express.Router();
 
 const controller = require('../controller/food');
 
-router.route('/test').get(controller.test);
 router.route('/').get(controller.getFoods);
 router.route('/market').get(controller.getFoodsMarket);
 router.route('/ingredient').get(controller.getHintMenu);
-router.route('/update-daily').put(controller.updateDaily);
+router.route('/menu').get(controller.getFoodsMenu);
+router.route('/menu/:key').get(controller.getDishesinMenu);
+router.route('/special/menu').get(controller.getSpecialMenu);
 
 module.exports = router;

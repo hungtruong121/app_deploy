@@ -47,7 +47,7 @@ exports.deleteNutrition = async (req, res, next) => {
 
 exports.getNutritions = async (req, res, next) => {
     try {
-        const nutrition = await NutritionsSchema.find().limit(20);
+        const nutrition = await NutritionsSchema.find({type: 'protein'});
         res.status(200).json({success: true, data: nutrition});
     } catch (error) {
         
