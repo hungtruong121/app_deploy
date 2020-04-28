@@ -131,7 +131,8 @@ exports.getFoodsMarket = async (req, res, next) => {
         let skipNumber = (page - 1) * 10;
         const count = await ProductSchema.countDocuments();
         if(skipNumber > count) skipNumber = count - 1;
-        const foods = await ProductSchema.find().skip(skipNumber).limit(20);
+        const foods = await ProductSchema.find();
+        //.skip(skipNumber).limit(20)
         res.status(200).json({
             success: true,
             data: foods,
