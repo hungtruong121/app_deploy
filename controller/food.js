@@ -26,7 +26,7 @@ exports.getFoods = async (req, res, next) => {
             }
             foods = await ProductSchema.find({
                 type: type
-            }).skip(skipNumber).limit(5);
+            });//.skip(skipNumber).limit(5);
         }
         if (price && type) {
             count = await ProductSchema.find({
@@ -44,7 +44,7 @@ exports.getFoods = async (req, res, next) => {
                 price: {
                     $lte: price
                 }
-            }).skip(skipNumber).limit(5);
+            });//.skip(skipNumber).limit(5);
         }
         if (!price && !type) {
             res.status(200).json({
@@ -69,7 +69,7 @@ exports.getFoodsMenu = async (req, res, next) => {
         let skipNumber = (page - 1) * 5;
         const count = await MenuSchema.countDocuments();
         if (skipNumber > count) skipNumber = count - 1;
-        const menu = await MenuSchema.find().skip(skipNumber).limit(5);
+        const menu = await MenuSchema.find();//.skip(skipNumber).limit(5);
         res.status(200).json({
             success: true,
             data: menu
@@ -112,7 +112,7 @@ exports.getSpecialMenu = async (req, res, next) => {
         if (skipNumber > count) skipNumber = count - 1;
         const specialMenu = await MenuSchema.find({
             isSpecial: true
-        }).skip(skipNumber).limit(5);
+        });//.skip(skipNumber).limit(5);
         res.status(200).json({
             success: true,
             data: specialMenu
@@ -131,8 +131,7 @@ exports.getFoodsMarket = async (req, res, next) => {
         let skipNumber = (page - 1) * 10;
         const count = await ProductSchema.countDocuments();
         if(skipNumber > count) skipNumber = count - 1;
-        const foods = await ProductSchema.find();
-        //.skip(skipNumber).limit(20)
+        const foods = await ProductSchema.find();//.skip(skipNumber).limit(20)
         res.status(200).json({
             success: true,
             data: foods,
