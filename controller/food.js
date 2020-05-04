@@ -1,8 +1,8 @@
 const ProductSchema = require('../models/products');
 const MenuSchema = require('../models/menu');
-const randomFunc = require('../middleware/random');
 const dishFunc = require('../middleware/dish');
 const DishSchema = require('../models/dishes');
+const NutritionShema = require('../models/nutritions');
 // @desc    API get material food following price [method:GET]
 // @route   /api/foods/?type=?&price=?
 
@@ -152,8 +152,8 @@ exports.getHintMenu = async (req, res, next) => {
                 _id: ids
             }]
         });
-        const menus = await DishSchema.find();
-        const keyMenu = dishFunc(foods, menus);
+        const dishes = await DishSchema.find();
+        const keyMenu = dishFunc(foods, dishes);
         const menusHint = await MenuSchema.find({
             $or: [{
                 key: keyMenu

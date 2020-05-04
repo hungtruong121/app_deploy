@@ -18,7 +18,7 @@ const lotteFullData = [{
     },
     {
         url: options.uri + '?category=2&categorytitle=4'
-    },// mineral
+    }, // mineral
     {
         url: options.uri + '?category=3&categorytitle=6'
     },
@@ -33,7 +33,7 @@ const lotteFullData = [{
     },
     {
         url: options.uri + '?category=3&categorytitle=10'
-    }// protein
+    } // protein
 ];
 
 async function scrapeLotte() {
@@ -51,10 +51,14 @@ async function scrapeLotte() {
                     .replace(',', '.').replace(/[0-9]+%/, '')
                     .replace('VND', '').trim();
                 const productImage = 'http://speedl.vn' + $(element).find('div.img-wrap').find('img').attr('src');
+                const tmp = $(element).find('div.img-wrap').find('a').attr('href');
+                const productURL = 'http://speedl.vn/ProductDetail.do?prd_seq=' + tmp.substr(tmp.indexOf("('") + 2,
+                    tmp.indexOf("')") - 2 - tmp.indexOf("('"));
                 product.products.push({
                     name: productName,
-                    price: productPrice,
-                    img: productImage
+                    price: parseFloat(productPrice) * 1000,
+                    img: productImage,
+                    url: productURL
                 });
             });
         });
