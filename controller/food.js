@@ -2,13 +2,11 @@ const ProductSchema = require('../models/products');
 const MenuSchema = require('../models/menu');
 const dishFunc = require('../middleware/dish');
 const DishSchema = require('../models/dishes');
-const NutritionShema = require('../models/nutritions');
 // @desc    API get material food following price [method:GET]
 // @route   /api/foods/?type=?&price=?
 
 exports.getFoods = async (req, res, next) => {
     const {
-        page,
         type,
         price
     } = req.query;
