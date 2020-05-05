@@ -1,8 +1,8 @@
 const ProductSchema = require('../models/products');
 const MenuSchema = require('../models/menu');
-const randomFunc = require('../middleware/random');
 const dishFunc = require('../middleware/dish');
 const DishSchema = require('../models/dishes');
+const NutritionShema = require('../models/nutritions');
 // @desc    API get material food following price [method:GET]
 // @route   /api/foods/?type=?&price=?
 
@@ -14,37 +14,18 @@ exports.getFoods = async (req, res, next) => {
     } = req.query;
     try {
         let foods;
-        let skipNumber = (page - 1) * 5;
-        let count;
         if (!price && type) {
-            count = await ProductSchema.find({
-                type: type
-            }).countDocuments();
-            console.log(count);
-            if (skipNumber > count) {
-                skipNumber = count - 1;
-            }
             foods = await ProductSchema.find({
                 type: type
-            }).skip(skipNumber).limit(5);
+            });
         }
         if (price && type) {
-            count = await ProductSchema.find({
-                type: type,
-                price: {
-                    $lte: price
-                }
-            }).countDocuments();
-            console.log(count);
-            if (skipNumber > count) {
-                skipNumber = count - 1;
-            }
             foods = await ProductSchema.find({
                 type: type,
                 price: {
                     $lte: price
                 }
-            }).skip(skipNumber).limit(5);
+            });
         }
         if (!price && !type) {
             res.status(200).json({
@@ -65,11 +46,7 @@ exports.getFoods = async (req, res, next) => {
 
 exports.getFoodsMenu = async (req, res, next) => {
     try {
-        const page = req.query;
-        let skipNumber = (page - 1) * 5;
-        const count = await MenuSchema.countDocuments();
-        if (skipNumber > count) skipNumber = count - 1;
-        const menu = await MenuSchema.find().skip(skipNumber).limit(5);
+        const menu = await MenuSchema.find();
         res.status(200).json({
             success: true,
             data: menu
@@ -104,15 +81,9 @@ exports.getDishesinMenu = async (req, res, next) => {
 
 exports.getSpecialMenu = async (req, res, next) => {
     try {
-        const page = req.query;
-        let skipNumber = (page - 1) * 5;
-        const count = await MenuSchema.find({
-            isSpecial: true
-        }).countDocuments();
-        if (skipNumber > count) skipNumber = count - 1;
         const specialMenu = await MenuSchema.find({
             isSpecial: true
-        }).skip(skipNumber).limit(5);
+        });
         res.status(200).json({
             success: true,
             data: specialMenu
@@ -127,11 +98,7 @@ exports.getSpecialMenu = async (req, res, next) => {
 
 exports.getFoodsMarket = async (req, res, next) => {
     try {
-        const page = req.query;
-        let skipNumber = (page - 1) * 10;
-        const count = await ProductSchema.countDocuments();
-        if(skipNumber > count) skipNumber = count - 1;
-        const foods = await ProductSchema.find().skip(skipNumber).limit(10);
+        const foods = await ProductSchema.find();
         res.status(200).json({
             success: true,
             data: foods,
@@ -152,8 +119,8 @@ exports.getHintMenu = async (req, res, next) => {
                 _id: ids
             }]
         });
-        const menus = await DishSchema.find();
-        const keyMenu = dishFunc(foods, menus);
+        const dishes = await DishSchema.find();
+        const keyMenu = dishFunc(foods, dishes);
         const menusHint = await MenuSchema.find({
             $or: [{
                 key: keyMenu
