@@ -1,16 +1,17 @@
 function findDishes(foods, dishes){
-    let menu = [];
+    const menu = [];
     foods.forEach((food, index) => {
-        let isSelected = true;
         dishes.forEach((dish, index2) => {
             const reg = new RegExp(dish.main_ingredient, 'gi');
-            if(food.indexOf(food.match(reg)) != -1 && isSelected){
-                if(menu.find(dish.menu)){
+            if(food.name.indexOf(food.name.match(reg)) != -1){
+                if(!menu.includes(dish.menu)){
                     menu.push(dish.menu);
                 }
-                isSelected = false;
             }
         });
     });
+
     return menu;
 }
+
+module.exports = findDishes;
