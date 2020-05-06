@@ -15,6 +15,7 @@ const lotteRoute = require('./router/admin_lotte');
 const catogoryRoute = require('./router/admin_catogory');
 const nutritionRoute = require('./router/admin_nutritions');
 const menuRoute = require('./router/admin_menu');
+const userRoute = require('./Hardwin/routes/user.route');
 
 const app = express();
 // Body parser
@@ -30,6 +31,7 @@ app.use('/api/admin/lotte', lotteRoute);
 app.use('/api/admin/catogory', catogoryRoute);
 app.use('/api/admin/nutrition', nutritionRoute);
 app.use('/api/admin/menu', menuRoute);
+app.use('/api/user', userRoute);
 
 
 
