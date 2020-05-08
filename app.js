@@ -17,7 +17,6 @@ const nutritionRoute = require('./router/admin_nutritions');
 const menuRoute = require('./router/admin_menu');
 const dishRoute = require('./router/dish');
 
-const userRoute = require('./Hardwin/routes/user.route');
 
 
 const app = express();
