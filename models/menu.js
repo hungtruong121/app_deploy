@@ -7,7 +7,9 @@ const MenuSchema = new mongooes.Schema({
         type: Number
     },
     isSpecial: Boolean,
-    img: String
+    img: String,
+    price: Number,
+    kindOf: Number
 });
 
 module.exports = mongooes.model('Menus', MenuSchema);
