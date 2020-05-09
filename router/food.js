@@ -8,6 +8,6 @@ router.route('/market').get(controller.getFoodsMarket);
 router.route('/ingredient').get(controller.getHintMenu);
 router.route('/menu').get(controller.getFoodsMenu);
 router.route('/menu/:key').get(controller.getDishesinMenu);
-router.route('/special/menu').get(controller.getSpecialMenu);
+router.route('/special/menu/:type').get(controller.getSpecialMenu);
 
 module.exports = router;

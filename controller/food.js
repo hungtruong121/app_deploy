@@ -75,12 +75,14 @@ exports.getDishesinMenu = async (req, res, next) => {
 };
 
 // @desc    API get menu special food
-// route    /api/foods/special/menu
+// route    /api/foods/special/menu/:type
 
 exports.getSpecialMenu = async (req, res, next) => {
     try {
+        const {type} = req.params;
         const specialMenu = await MenuSchema.find({
-            isSpecial: true
+            isSpecial: true,
+            kindOf: type
         });
         res.status(200).json({
             success: true,
